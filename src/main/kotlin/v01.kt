@@ -46,7 +46,13 @@ fun main(){
         println("Random Quote from: ${randomCategory} -> ${mapOfQuotes[randomCategory]?.get(randomCounterOfQuotes)}") //print final random quote
     } //function to print a total random quote from between all categories
 
-    printCategoryQuote(input)
-    printTotalRandomQuote()
+    if(input != "Random") {
+        printCategoryQuote(input)
+    } else {
+        printTotalRandomQuote()
+    }
+
+
+
 
 }
