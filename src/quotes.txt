@@ -1,4 +1,5 @@
 .RANDOM.
+random%place holder quote.(author)
 
 .MOTIVATIONAL.
 motivational%It always seems impossible until it's done.
