@@ -1,70 +1,90 @@
 
+import java.io.File
+import java.util.Scanner
+
+//Current version is v02.kt
 
 fun main(){
+    //Here I source my quotes.txt file where I have al my quotes saved and nicely formatted to be read by my program
+    val fileQuotes = "src/quotes.txt"
+    val readQuotes = File(fileQuotes).readLines()
 
-    ///////
-    //Variables Declaration
-
-    //Declaration of map, map categories (keys) and respective quotes (values
-    val mapOfQuotes: MutableMap<String, MutableList<String>> = mutableMapOf<String, MutableList<String>>()
-    mapOfQuotes["Motivational"] = mutableListOf("It always seems impossible until it's done.", "Start where you are. Use what you have. Do what you can.", "Aim for the moon. If you miss, you may hit a star.", "If you fell down yesterday, stand up today.")
-    mapOfQuotes["Life"] = mutableListOf("One More Quote","He who has a why to live can bear almost any how.", "We do not remember days, we remember moments.", "Life is a lively process of becoming.", "Life is a lively process of becoming.")
-    mapOfQuotes["Funny"] = mutableListOf("A day without sunshine is like, you know, night.", "Do not take life too seriously. You will never get out of it alive", "What's another word for Thesaurus?", "Never take a solemn oath. People think you mean it.")
-    mapOfQuotes["Love"] = mutableListOf("Love has no age, no limit; and no death.", "Life is the flower for which love is the honey.", "Great thoughts come from the heart.", "To love and be loved is to feel the sun from both sides.")
-
-    //Here I select the category I want a quote from
-    val selectCategory = "Life"
-
-
-    //Finished variables declaration
-    ///////
-
-    //I than create a counter and an if + for condition to get the number of quotes the selected category haves. This is needed to randomized the quote in a further step
-    var counterOfQuotes = 0
-    fun quotesCounter() {
-        counterOfQuotes = 0
-        if (mapOfQuotes.containsKey(selectCategory)) {
-            for (value in mapOfQuotes[selectCategory]!!) {
-                counterOfQuotes += 1
-            }
-        } else {
-            println("We do not have the category: ${selectCategory}. Please select other.")
+    //Here I filter all categories names and store them in a list to be print out to the user. This way user Knows what categories he can chose
+    val categoriesList: MutableList<String> = mutableListOf()
+    for (items in readQuotes) {
+        if (items.endsWith(".") && items.startsWith(".")) {
+            //println("this is my 1 print: $items")
+            val temp = items.split(".")
+            categoriesList.add(temp[1])
         }
     }
-    quotesCounter() //I execute the fun quotesCounter to update my counter to the number of elements the selected category haves
 
+    //Here I select the category I want a quote from.
+    //In my TXT file I have category titles in UpperCase and quotes filter in LowerCase to help me better filter it
+    //That's why I have in my input request the .toUpperCase method, and in my containsCategory filter .toLowerCase method
+    val scanner = Scanner(System.`in`)
+    println("Categories -> $categoriesList")
+    print("Please choose the category you like or just go for the random quote of the day: ")
+    var input = scanner.nextLine().toUpperCase()
+    var inputCatFilter = (".$input.")
 
+    //While user does not input a category that I have I will loop my input request until it's true
+    //I use inputCatFilter because to check if it's true I have to add . + . to user input to match my txt file format
+    while (readQuotes.contains(inputCatFilter) != true) {
+        println("Sorry, We don't have that category. Can you please choose again?")
+        input = scanner.nextLine().toUpperCase()
+        inputCatFilter = (".$input.")
+    }
 
-    fun quotesRandomInt(quoteLastIndex: Int): Int {
-        return (0 until quoteLastIndex).random()
-    } //this function is only to create a random number between 0 and the last index of selected category
-    val randomInt = quotesRandomInt(counterOfQuotes) //wich I'll then store into a variable
+    //function to print a quote from the chosen category
+    fun printCategoryQuote(selectCategory: String) {
+        //Once input is valid, I read again my file save into readQuotes variable, do a filter based on the input and save those lines to a new variable
+        val containsCategory = readQuotes.filter { it.contains(input.toLowerCase()) }
+        val filteredList: MutableList<String> = mutableListOf<String>() //Here I declare an empty mutable List where I will save my filtered quotes to later randomize and print one of them
 
-    fun printCategoryQuote(category: String, randomNumber: Int) {
-        println(mapOfQuotes[category]?.get(randomNumber))
-    } //function to print a random quote of selected cateogory
+        //In this loop I go trough all filtered quotes, split and remove filter tag, save quote to filteredList variable
+        for (item in containsCategory.indices) {
+            val temp = containsCategory[item].split('%')
+            filteredList.add(temp[1])
+        }
+        //In this block I will finally random pick one quote and print it
+        val counterOfQuotes: Int = filteredList.size
+        val randomInt = (0 until counterOfQuotes).random() //here I get a random number that will allow me to print a random quote from a selected category
+        println("Quote from: $selectCategory -> ${filteredList[randomInt]}")//print final  quote
+    }
 
+    //function to print a total random quote from between all categories
     fun printTotalRandomQuote() {
-        val listOfCategories = mapOfQuotes.keys.toMutableList()
-        val listOfCategoriesSize = mapOfQuotes.size
-        val randomIntCat: Int = (0 until listOfCategoriesSize).random()
-        val randomCategory = listOfCategories[randomIntCat]
-        println(mapOfQuotes[randomCategory]?.get(randomInt))
-    } //funtion to print a total random quote from between all categories
+        val categoriesListSize = categoriesList.size //finds list size
+        val randomIntCat: Int = (0 until categoriesListSize).random() //creates a random int based on list size
+        val randomCategory = categoriesList[randomIntCat] //selects a random category based on previous step
 
-    printCategoryQuote(selectCategory, randomInt)
-    printTotalRandomQuote()
+        //Once input is valid, I read again my file save into readQuotes variable, do a filter based on the input and save those lines to a new variable
+        val containsRandomCategory = readQuotes.filter { it.contains(randomCategory.toLowerCase()) }
+        val filteredRandomList: MutableList<String> = mutableListOf<String>() //Here I declare an empty mutable List where I will save my filtered quotes to later randomize and print one of them
 
-    //Create a random number with a range limited bu the number of quotes that exist in the selected category and print quote
-//    val randomInt: Int = (0 until counterOfQuotes).random()
-//    println(mapOfQuotes[selectCategory]?.get(randomInt))
-//
-//    //These lines select a random category and print a random quote from it
-//    val listOfCategories = mapOfQuotes.keys.toMutableList()
-//    val listOfCategoriesSize = mapOfQuotes.size
-//    val randomIntCat: Int = (0 until listOfCategoriesSize).random()
-//    println(listOfCategories[randomIntCat]) //dont need this line. Only to check is selection is working right
-//    val randomCategory = listOfCategories[randomIntCat]
-//    println(mapOfQuotes[randomCategory]?.get(randomInt)) //todo este randomInt está a ir à selectedcategory. Tem que ir antes à randomCategory para não ir outofbounds
+        //In this loop I go trough all filtered quotes, split and remove filter tag, save quote to filteredList variable
+        for (item in containsRandomCategory.indices) {
+            val temp = containsRandomCategory[item].split('%')
+            filteredRandomList.add(temp[1])
+        }
+        //In this block I will finally random pick one quote and print it
+        val counterOfQuotes: Int = filteredRandomList.size
+        val randomInt = (0 until counterOfQuotes).random() //here I get a random number that will allow me to print a random quote from a selected category
+        println("Your random quote is from ${randomCategory} -> ${filteredRandomList[randomInt]}")//print final  quote
+    }
 
+    //In these final lines I have a do-while loop that prompts the user if he wants another quote.
+    do {
+        var anotherQuote: String
+        if(inputCatFilter != ".RANDOM.") {
+            printCategoryQuote(input)
+            println("Do you want another quote?(yes/no)")
+            anotherQuote = scanner.nextLine()
+        } else {
+            printTotalRandomQuote()
+            println("Do you want another random quote?(yes/no)")
+            anotherQuote = scanner.nextLine()
+        }
+    } while (anotherQuote == "yes" || anotherQuote == "Yes" || anotherQuote == "y" || anotherQuote == "Y")
 }
