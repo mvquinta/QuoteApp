@@ -1,4 +1,6 @@
-MOTIVATIONAL
+.RANDOM.
+
+.MOTIVATIONAL.
 motivational%It always seems impossible until it's done.
 motivational%Start where you are.
 motivational%Use what you have.
@@ -6,21 +8,38 @@ motivational%Do what you can.
 motivational%Aim for the moon. If you miss, you may hit a star.
 motivational%If you fell down yesterday, stand up today.
 
-LIFE
+.LIFE.
 life%One More Quote.
 life%He who has a why to live can bear almost any how.
 life%We do not remember days, we remember moments
 life%Life is a lively process of becoming.
 life%Life is a lively process of becoming.
 
-FUNNY
+.FUNNY.
 funny%A day without sunshine is like, you know, night.
 funny%Do not take life too seriously. You will never get out of it alive.
 funny%What's another word for Thesaurus.
 funny%Never take a solemn oath. People think you mean it.
 
-LOVE
+.LOVE.
 love%Love has no age, no limit; and no death.
 love%Life is the flower for which love is the honey.
 love%Great thoughts come from the heart.
 love%To love and be loved is to feel the sun from both sides.
+
+.POSITIVE.
+positive%Once you replace negative thoughts with positive ones, you'll start having positive results.(Willie Nelson)
+positive%The most important thing is to try and inspire people so that they can be great in whatever they want to do.(Kobe Bryant)
+positive%Yesterday is not ours to recover, but tomorrow is ours to win or lose.(Lyndon B. Johnson)
+positive%Live life to the fullest, and focus on the positive.(Matt Cameron)
+positive%Always turn a negative situation into a positive situation.(Michael Jordan(
+positive%Your smile will give you a positive countenance that will make people feel comfortable around you.(Les Brown)
+
+.INSPIRATIONAL.
+inspirational%The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.(Helen Keller)
+inspirational%Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible.(Francis of Assisi)
+inspirational%What lies behind you and what lies in front of you, pales in comparison to what lies inside of you.(Ralph Waldo Emerson)
+inspirational%I can't change the direction of the wind, but I can adjust my sails to always reach my destination.(Jimmy Dean)
+inspirational%If opportunity doesn't knock, build a door.(Milton Berie)
+
+
