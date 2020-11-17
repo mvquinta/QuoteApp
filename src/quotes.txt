@@ -8,8 +8,7 @@ motivational%Do what you can.
 motivational%Aim for the moon. If you miss, you may hit a star.
 motivational%If you fell down yesterday, stand up today.
 
-.LIFE.
-life%One More Quote.
+.LIFE..
 life%He who has a why to live can bear almost any how.
 life%We do not remember days, we remember moments
 life%Life is a lively process of becoming.
